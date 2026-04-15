@@ -1,0 +1,49 @@
+================================================================================
+Evaluating Complaint: COMP_20260415_151646
+================================================================================
+
+Step 1: Classifying complaint...
+[OpenAI API Call] Model: gpt-4-turbo, Temp: 0.3
+  Classified as: Fees & Charges Dispute (Confidence: 0.95)
+  Primary Type: Fees & Charges Dispute
+  Confidence: 95.00%
+
+Step 2: Loading evaluation metrics...
+  Loaded 4 metrics for 'Fees & Charges Dispute'
+
+Step 3: Evaluating against metrics...
+[OpenAI API Call] Model: gpt-4-turbo, Temp: 0.5
+[OpenAI API Call] Model: gpt-4-turbo, Temp: 0.5
+[OpenAI API Call] Model: gpt-4-turbo, Temp: 0.5
+[OpenAI API Call] Model: gpt-4-turbo, Temp: 0.5
+  General Accuracy: 5.0/5
+  General Completeness: 5.0/5
+  General Clarity: 5.0/5
+  Relevance: 5.0/5
+
+Step 4: Generating final judgment...
+[OpenAI API Call] Model: gpt-4-turbo, Temp: 0.6
+  Aggregate Score: 5.00/5
+  Weighted Score: 5.00/5
+  Risk Level: low
+  Recommendation: approve
+  Requires Human Review: False
+
+
+===============================================================================================
+EVALUATION RESULTS TABLE
+===============================================================================================
+Metric                            Score     Weight     Weighted      Max
+-----------------------------------------------------------------------------------------------
+General Accuracy                   5.00      30.0%        1.500      5.0
+General Completeness               5.00      30.0%        1.500      5.0
+General Clarity                    5.00      25.0%        1.250      5.0
+Relevance                          5.00      15.0%        0.750      5.0
+-----------------------------------------------------------------------------------------------
+AGGREGATE SCORE (Unweighted)       5.00/5
+WEIGHTED SCORE                     5.00/5
+-----------------------------------------------------------------------------------------------
+Risk Level                          LOW
+Recommendation                  APPROVE
+Human Review Required                NO
+===============================================================================================

@@ -212,18 +212,6 @@
 8. Navigate → 📊 View Results (to see history)
 ```
 
-### Pattern 3: Batch Processing (Coming Soon)
-
-```
-1. Prepare JSON file with multiple complaints
-2. Navigate → 📝 Evaluate Complaint
-3. Select "JSON Upload"
-4. Upload file
-5. Click "🔍 Batch Evaluate"
-6. Monitor Progress
-7. Navigate → 📊 View Results
-8. Export Report
-```
 
 ## Color Coding System
 

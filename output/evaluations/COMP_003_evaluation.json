@@ -1,0 +1,111 @@
+{
+  "complaint": {
+    "complaint_id": "COMP_003",
+    "customer_id": "CUST_COMP_003",
+    "original_complaint": "I called yesterday just to check my balance and it took 45 minutes and three \n            different people to get an answer. This is ridiculous for such a simple question. \n            Your staff should be better trained to handle basic requests without transferring \n            people around. Very frustrating experience.",
+    "summary": "Customer reports unsatisfactory experience with phone support on 04/07/2026. \n            Called regarding simple balance inquiry but was transferred three times and \n            waited 45 minutes total. Final representative was able to answer question but \n            customer felt the experience was inefficient. Customer suggests better training \n            for front-line staff to handle basic inquiries without multiple transfers.",
+    "submission_date": "2026-04-09T10:28:08.191985",
+    "complaint_type": "customer_service",
+    "secondary_types": [],
+    "has_previous_complaints": false,
+    "previous_complaint_count": 0,
+    "is_high_value_customer": false,
+    "metadata": {}
+  },
+  "evaluation": {
+    "complaint_id": "COMP_003",
+    "complaint_type": "customer_service",
+    "evaluation_timestamp": "2026-04-09T10:33:22.712992",
+    "metric_scores": [
+      {
+        "metric_id": "accuracy",
+        "metric_name": "Event Accuracy",
+        "score": 5,
+        "normalized_score": 1.0,
+        "reasoning": "The complaint summary accurately captures the key events and details from the original complaint without any discrepancies or omissions. It effectively summarizes the customer's experience, including the duration of the call, the number of transfers, and the final resolution. The summary also reflects the customer's feelings about the inefficiency of the service and their suggestion for improvement, which aligns with the sentiments expressed in the original complaint.",
+        "evidence": [
+          "Called regarding simple balance inquiry but was transferred three times and waited 45 minutes total.",
+          "Customer suggests better training for front-line staff to handle basic inquiries without multiple transfers."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "completeness",
+        "metric_name": "Incident Details",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The summary captures most of the essential details of the interaction, including the date of the call, the number of transfers, the total wait time, and the nature of the inquiry. It also reflects the customer's dissatisfaction and their suggestion for improvement. However, it lacks the emotional tone expressed in the original complaint, which emphasized the customer's frustration.",
+        "evidence": [
+          "Customer reports unsatisfactory experience with phone support on 04/07/2026.",
+          "Called regarding simple balance inquiry but was transferred three times and waited 45 minutes total.",
+          "Customer suggests better training for front-line staff to handle basic inquiries without multiple transfers."
+        ],
+        "suggestions": [
+          "Include more expressive language to convey the customer's frustration as shown in the original complaint.",
+          "Mention the customer's description of the experience as 'ridiculous' and 'very frustrating' to better capture the emotional impact of the incident."
+        ]
+      },
+      {
+        "metric_id": "clarity",
+        "metric_name": "Narrative Clarity",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary provides a clear timeline and description of the events, detailing the date of the incident, the nature of the inquiry, the number of transfers, and the total waiting time. The final interaction with a representative who resolved the query is also mentioned, which completes the narrative of the customer's experience.",
+        "evidence": [
+          "Customer reports unsatisfactory experience with phone support on 04/07/2026.",
+          "Called regarding simple balance inquiry but was transferred three times and waited 45 minutes total.",
+          "Final representative was able to answer question but customer felt the experience was inefficient."
+        ],
+        "suggestions": [
+          "To enhance clarity, it would be beneficial to include specific details about what caused the transfers or any interactions with the previous representatives to provide deeper insight into the customer's experience.",
+          "Adding direct quotes or specific sentiments expressed by the customer during the interaction could further enhance the narrative clarity."
+        ]
+      },
+      {
+        "metric_id": "sentiment_capture",
+        "metric_name": "Customer Sentiment",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary effectively captures the customer's frustration and dissatisfaction with the phone support experience, reflecting the customer's sentiment as described in the original complaint. The summary accurately recounts the customer's experience of being transferred multiple times and the excessive wait time, which aligns with the original complaint's description. However, the summary could more vividly convey the intensity of the customer's frustration, which is more palpable in the original complaint with phrases like 'This is ridiculous' and 'Very frustrating experience.'",
+        "evidence": [
+          "Customer reports unsatisfactory experience with phone support",
+          "customer felt the experience was inefficient"
+        ],
+        "suggestions": [
+          "Include more direct language from the original complaint to better reflect the customer's strong emotions, such as incorporating phrases like 'This is ridiculous' or 'Very frustrating experience.'",
+          "Enhance the summary by explicitly noting the emotional impact on the customer, such as adding 'Customer expressed significant frustration and dissatisfaction with the service.'"
+        ]
+      },
+      {
+        "metric_id": "objectivity",
+        "metric_name": "Objective Reporting",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The summary provides a factual recount of the customer's experience with phone support, maintaining a neutral tone throughout. It accurately captures the essence of the original complaint, including the key details such as the duration of the call, the number of transfers, and the final resolution. The summary avoids using emotive language present in the original complaint such as 'ridiculous' and 'very frustrating', which contributes to its objectivity. However, the summary slightly omits the customer's tone of frustration, which is a subtle but significant aspect of the original complaint's sentiment.",
+        "evidence": [
+          "Called regarding simple balance inquiry but was transferred three times and waited 45 minutes total.",
+          "Final representative was able to answer question but customer felt the experience was inefficient."
+        ],
+        "suggestions": [
+          "Include a brief mention of the customer's expressed frustration to fully capture the emotional context of the complaint, enhancing the completeness of the summary while maintaining objectivity."
+        ]
+      }
+    ],
+    "aggregate_score": 4.2,
+    "weighted_score": 4.2,
+    "risk_level": "low",
+    "recommendation": "approve",
+    "reasoning": "The summary is well-crafted, capturing the essential facts and sentiments of the original complaint effectively. It maintains a balance between detail and brevity, ensuring that the key points of the customer's experience are communicated clearly.",
+    "strengths": [
+      "Accurate capture of event details and customer sentiments",
+      "Clear narrative structure that outlines the sequence of events and final resolution",
+      "Objective reporting that avoids emotive language while still conveying the customer's dissatisfaction"
+    ],
+    "weaknesses": [
+      "Lacks the full emotional intensity conveyed by the customer, which could affect the perceived urgency of the complaint"
+    ],
+    "requires_human_review": false,
+    "triggered_rules": [],
+    "confidence_score": 0.85
+  }
+}

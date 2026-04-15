@@ -1,0 +1,37 @@
+================================================================================
+HUMAN REVIEW REQUEST
+================================================================================
+Request ID: 94da7038-8007-4096-94dd-b8d053eefa69
+Complaint ID: SAMPLE_20260415_150709
+Priority: 1 (1=Highest, 5=Lowest)
+Created: 2026-04-15 15:08:15
+Deadline: 2026-04-15 17:08:15
+Status: pending
+
+EXECUTIVE SUMMARY:
+--------------------------------------------------------------------------------
+High-risk fraud complaint requiring expert review
+
+KEY CONCERNS:
+--------------------------------------------------------------------------------
+  • Risk level assessment
+  • Regulatory implications
+  • Customer impact
+
+REVIEW QUESTIONS:
+--------------------------------------------------------------------------------
+  ? Is the risk assessment accurate?
+  ? Are there immediate actions required?
+
+RECOMMENDED ACTIONS:
+--------------------------------------------------------------------------------
+  ✓ Review complaint details
+  ✓ Verify facts
+  ✓ Determine resolution path
+
+EVALUATION SUMMARY:
+--------------------------------------------------------------------------------
+Risk Level: HIGH
+Aggregate Score: 4.25/5
+Recommendation: ESCALATE
+================================================================================

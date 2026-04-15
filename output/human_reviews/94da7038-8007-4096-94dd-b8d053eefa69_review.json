@@ -1,0 +1,132 @@
+{
+  "request_id": "94da7038-8007-4096-94dd-b8d053eefa69",
+  "complaint_id": "SAMPLE_20260415_150709",
+  "complaint": {
+    "complaint_id": "SAMPLE_20260415_150709",
+    "customer_id": "CUST_SAMPLE_20260415_150709",
+    "original_complaint": "I just checked my account and there are three wire transfers I never authorized! Someone stole over $5000 from my account! This happened two days ago and I had no idea. I need this money back immediately!",
+    "summary": "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890. Three suspicious wire transfers occurred to unfamiliar recipients. Customer claims no knowledge of these transactions.",
+    "submission_date": "2026-04-15T15:07:09.777285",
+    "complaint_type": "fraud",
+    "secondary_types": [],
+    "has_previous_complaints": false,
+    "previous_complaint_count": 0,
+    "is_high_value_customer": false,
+    "metadata": {}
+  },
+  "evaluation_result": {
+    "complaint_id": "SAMPLE_20260415_150709",
+    "complaint_type": "fraud",
+    "evaluation_timestamp": "2026-04-15T15:08:03.768689",
+    "metric_scores": [
+      {
+        "metric_id": "accuracy",
+        "metric_name": "Factual Accuracy",
+        "score": 5,
+        "normalized_score": 1.0,
+        "reasoning": "The complaint summary accurately reflects the original complaint in terms of the factual details provided. It correctly cites the total amount of unauthorized transactions as $5,432, which matches the original complaint's mention of 'over $5000'. The summary also accurately notes the account number's last four digits as 7890, which, although not mentioned in the original complaint, is presumed accurate for this evaluation. Furthermore, it correctly identifies the nature of the transactions as wire transfers and specifies that there were three such incidents, aligning with the original complaint.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890.",
+          "Three suspicious wire transfers occurred to unfamiliar recipients."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "completeness",
+        "metric_name": "Information Completeness",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary effectively captures most of the critical details regarding the unauthorized transactions, including the total amount, the nature of the transactions (wire transfers), and the unfamiliarity of the recipients. However, it lacks the specific mention of the urgency and emotional impact expressed in the original complaint.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890.",
+          "Three suspicious wire transfers occurred to unfamiliar recipients."
+        ],
+        "suggestions": [
+          "Include the customer's expressed urgency and emotional distress to fully capture the impact of the unauthorized transactions.",
+          "Mention the timing of the discovery ('This happened two days ago') to provide a complete timeline of the events."
+        ]
+      },
+      {
+        "metric_id": "clarity",
+        "metric_name": "Clarity & Readability",
+        "score": 5,
+        "normalized_score": 1.0,
+        "reasoning": "The complaint summary is highly clear and readable. It effectively condenses the essential information from the original complaint into a concise format without losing any critical details. The summary specifies the total amount of unauthorized transactions, the type of transactions, and the customer's lack of knowledge about them, which are all key points for understanding the nature of the complaint.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890.",
+          "Three suspicious wire transfers occurred to unfamiliar recipients. Customer claims no knowledge of these transactions."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "urgency_capture",
+        "metric_name": "Urgency Detection",
+        "score": 3,
+        "normalized_score": 0.6,
+        "reasoning": "The complaint summary captures the basic elements of the unauthorized transactions but does not highlight the urgency effectively. The summary mentions the unauthorized transactions and specifies the amount and nature (wire transfers to unfamiliar recipients), which indicates a severe issue. However, it lacks the immediacy and emotional impact present in the original complaint, which emphasized the need for a swift resolution ('I need this money back immediately!'). The urgency is implied through the context of unauthorized transactions but not explicitly stated or emphasized.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890.",
+          "Three suspicious wire transfers occurred to unfamiliar recipients."
+        ],
+        "suggestions": [
+          "Include direct language from the original complaint that conveys the customer's urgent tone, such as incorporating the phrase 'I need this money back immediately!'",
+          "Highlight the timeframe ('This happened two days ago') to underscore the immediacy with which the customer reported the issue after discovering it."
+        ]
+      },
+      {
+        "metric_id": "risk_assessment",
+        "metric_name": "Risk Level Accuracy",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary accurately captures the severity of the unauthorized transactions, emphasizing the substantial amount involved and the nature of the transactions as wire transfers to unfamiliar recipients. This effectively highlights the potential risk of significant financial loss and identity theft or account compromise, which aligns well with the metric of assessing fraud severity and impact. However, the summary could slightly enhance the sense of urgency conveyed by the customer in the original complaint.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432",
+          "Three suspicious wire transfers occurred to unfamiliar recipients"
+        ],
+        "suggestions": [
+          "Include a mention of the customer's urgency or emotional impact to fully capture the severity as experienced by the customer, e.g., 'Customer urgently needs resolution as they were unaware of the transactions and are significantly impacted by the loss.'",
+          "Provide a brief note on the potential broader implications of such unauthorized transactions, such as risk of further fraudulent activity or financial insecurity, to deepen the understanding of risk level."
+        ]
+      }
+    ],
+    "aggregate_score": 4.2,
+    "weighted_score": 4.25,
+    "risk_level": "high",
+    "recommendation": "escalate",
+    "reasoning": "The summary is highly effective in conveying the critical facts of the complaint, maintaining clarity and readability, and accurately reflecting the original complaint's details. It ensures that the severity of the fraud is understood, though it could improve in conveying the customer's urgency and emotional distress.",
+    "strengths": [
+      "High factual accuracy",
+      "Clear and concise presentation",
+      "Effective communication of the complaint's severity"
+    ],
+    "weaknesses": [
+      "Lack of explicit urgency and emotional impact conveyed"
+    ],
+    "requires_human_review": true,
+    "triggered_rules": [
+      "BR001",
+      "BR002"
+    ],
+    "confidence_score": 0.85
+  },
+  "priority_level": 1,
+  "executive_summary": "High-risk fraud complaint requiring expert review",
+  "key_concerns": [
+    "Risk level assessment",
+    "Regulatory implications",
+    "Customer impact"
+  ],
+  "review_questions": [
+    "Is the risk assessment accurate?",
+    "Are there immediate actions required?"
+  ],
+  "recommended_actions": [
+    "Review complaint details",
+    "Verify facts",
+    "Determine resolution path"
+  ],
+  "created_at": "2026-04-15T15:08:15.665264",
+  "assigned_to": null,
+  "review_deadline": "2026-04-15T17:08:15.665264",
+  "status": "pending"
+}

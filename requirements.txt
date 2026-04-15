@@ -1,0 +1,31 @@
+# LLM Judge Agent System - Requirements
+
+# Core Dependencies
+pyyaml>=6.0.1
+python-dateutil>=2.8.2
+python-dotenv>=1.0.0
+
+# LLM API Integration (choose based on your provider)
+openai>=1.12.0  # For OpenAI GPT models
+# anthropic>=0.18.0  # Uncomment for Claude models
+# azure-openai>=1.0.0  # Uncomment for Azure OpenAI
+
+# Data Processing
+dataclasses-json>=0.6.4
+
+# UI Framework
+streamlit>=1.31.0
+plotly>=5.18.0  # For interactive charts
+pandas>=2.2.0  # For data analysis and reporting
+
+# Development and Testing
+pytest>=8.0.0
+pytest-cov>=4.1.0
+black>=24.1.0
+flake8>=7.0.0
+mypy>=1.8.0
+
+# Optional: For enhanced functionality
+# langchain>=0.1.0  # For advanced LLM orchestration
+# pydantic>=2.6.0  # For enhanced data validation
+# redis>=5.0.0  # For caching LLM responses

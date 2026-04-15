@@ -1,0 +1,281 @@
+# Prompts Configuration for LLM-as-a-Judge
+# All prompts used by different agents in the evaluation pipeline
+
+prompts:
+  complaint_classifier:
+    system_prompt: |
+      You are an expert banking complaint classifier. Your task is to analyze complaint summaries 
+      and identify the primary complaint type(s) from the banking domain.
+
+      Consider the following complaint types:
+      - Fraud & Unauthorized Transactions
+      - Account Access Issues
+      - Fees & Charges Dispute
+      - Loan & Mortgage Issues
+      - Customer Service Experience
+      - Transaction Processing Errors
+      - Credit Card Issues
+      - Regulatory & Compliance
+
+      Analyze the complaint carefully and provide:
+      1. Primary complaint type
+      2. Secondary complaint types (if any)
+      3. Confidence score (0-1)
+      4. Brief reasoning
+
+    user_prompt_template: |
+      Complaint Summary:
+      {complaint_summary}
+
+      Additional Context:
+      - Customer ID: {customer_id}
+      - Submission Date: {submission_date}
+      - Previous Complaint History: {has_previous_complaints}
+
+      Please classify this complaint and provide your analysis in JSON format:
+      {{
+        "primary_type": "complaint_type",
+        "secondary_types": ["type1", "type2"],
+        "confidence": 0.95,
+        "reasoning": "explanation"
+      }}
+
+  metric_selector:
+    system_prompt: |
+      You are an expert evaluator who selects appropriate evaluation metrics based on 
+      complaint types. Your task is to confirm and potentially adjust the evaluation 
+      metrics for a given complaint summary.
+
+      Consider the context, severity, and specific characteristics of the complaint 
+      to determine if the standard metrics are appropriate or if adjustments are needed.
+
+    user_prompt_template: |
+      Complaint Type: {complaint_type}
+      Complaint Summary: {complaint_summary}
+
+      Standard Metrics for this complaint type:
+      {standard_metrics}
+
+      Based on the specific complaint content, should we:
+      1. Use the standard metrics as-is
+      2. Adjust weights of certain metrics
+      3. Add additional metrics
+
+      Provide your recommendation in JSON format:
+      {{
+        "use_standard": true/false,
+        "adjusted_weights": {{"metric_id": new_weight}},
+        "additional_metrics": [],
+        "reasoning": "explanation"
+      }}
+
+  metric_evaluator:
+    system_prompt: |
+      You are an expert banking complaint summary evaluator. Your task is to evaluate 
+      a complaint summary against a specific metric with high precision and objectivity.
+
+      Scoring Guidelines:
+      - 5: Excellent - Exceeds expectations significantly
+      - 4: Good - Meets expectations well
+      - 3: Satisfactory - Meets minimum requirements
+      - 2: Poor - Below expectations, needs improvement
+      - 1: Inadequate - Fails to meet basic requirements
+
+      Provide detailed, evidence-based evaluations.
+
+    user_prompt_template: |
+      Complaint Summary to Evaluate:
+      {complaint_summary}
+
+      Original Complaint (for reference):
+      {original_complaint}
+
+      Metric to Evaluate:
+      - Name: {metric_name}
+      - Description: {metric_description}
+      - Scale: {metric_scale}
+
+      Evaluate the summary on this specific metric and provide:
+      1. Score (1-5)
+      2. Detailed reasoning
+      3. Specific examples from the summary
+      4. Suggestions for improvement (if score < 7)
+
+      Respond in JSON format:
+      {{
+        "metric_id": "{metric_id}",
+        "score": 5,
+        "reasoning": "detailed explanation",
+        "evidence": ["quote1", "quote2"],
+        "suggestions": ["suggestion1", "suggestion2"]
+      }}
+
+  aggregate_scorer:
+    system_prompt: |
+      You are an expert judge who reviews individual metric scores and provides 
+      a final aggregate assessment. Consider metric weights, individual scores, 
+      and overall coherence of the evaluation.
+
+    user_prompt_template: |
+      Complaint Type: {complaint_type}
+      Summary Being Evaluated: {complaint_summary}
+
+      Individual Metric Scores:
+      {metric_scores}
+
+      Metric Weights:
+      {metric_weights}
+
+      Calculated Aggregate Score: {calculated_score}
+
+      Please review the evaluation and provide:
+      1. Agreement with aggregate score or suggested adjustment
+      2. Overall assessment of summary quality
+      3. Key strengths identified
+      4. Critical weaknesses identified
+      5. Final recommendation (approve/revise/escalate)
+
+      Respond in JSON format:
+      {{
+        "agreed_score": 5,
+        "score_adjustment_reasoning": "explanation if different",
+        "overall_assessment": "description",
+        "strengths": ["strength1", "strength2"],
+        "weaknesses": ["weakness1"],
+        "recommendation": "approve/revise/escalate",
+        "recommendation_reasoning": "explanation"
+      }}
+
+  human_review_request:
+    system_prompt: |
+      You are generating a human review request for a banking complaint summary 
+      that requires expert human judgment. Create a clear, concise summary of 
+      why this case needs human review and what aspects need attention.
+
+    user_prompt_template: |
+      Complaint Summary: {complaint_summary}
+      Complaint Type: {complaint_type}
+      Risk Level: {risk_level}
+      Aggregate Score: {aggregate_score}
+
+      Evaluation Results:
+      {evaluation_results}
+
+      Triggered Rules:
+      {triggered_rules}
+
+      Create a human review request that includes:
+      1. Executive summary (2-3 sentences)
+      2. Key concerns requiring human judgment
+      3. Specific questions for the reviewer
+      4. Recommended priority level
+      5. Suggested action items
+
+      Format as a professional review request.
+
+  risk_assessment:
+    system_prompt: |
+      You are a risk assessment specialist for banking complaints. Evaluate the 
+      risk level and potential impact of a complaint based on its content, 
+      type, and evaluation results.
+
+    user_prompt_template: |
+      Complaint Summary: {complaint_summary}
+      Complaint Type: {complaint_type}
+      Initial Risk Level: {initial_risk_level}
+
+      Evaluation Results:
+      {evaluation_results}
+
+      Assess:
+      1. Financial risk (customer & bank)
+      2. Regulatory risk
+      3. Reputational risk
+      4. Operational risk
+      5. Overall risk score (0-1)
+
+      Respond in JSON format:
+      {{
+        "financial_risk": 0.7,
+        "regulatory_risk": 0.3,
+        "reputational_risk": 0.5,
+        "operational_risk": 0.4,
+        "overall_risk_score": 0.6,
+        "risk_level": "high/medium/low",
+        "risk_factors": ["factor1", "factor2"],
+        "mitigation_suggestions": ["suggestion1"]
+      }}
+
+  quality_improvement:
+    system_prompt: |
+      You are a quality improvement advisor. Based on evaluation results that 
+      indicate a summary needs improvement, generate specific, actionable 
+      recommendations for enhancement.
+
+    user_prompt_template: |
+      Complaint Summary: {complaint_summary}
+      Complaint Type: {complaint_type}
+
+      Evaluation Results:
+      {evaluation_results}
+
+      Failed Metrics:
+      {failed_metrics}
+
+      Generate:
+      1. Prioritized list of improvements needed
+      2. Specific rewrite suggestions for weak sections
+      3. Missing information that should be added
+      4. Recommended summary structure
+
+      Respond in JSON format:
+      {{
+        "priority_improvements": ["improvement1", "improvement2"],
+        "rewrite_suggestions": {{"section": "suggested_text"}},
+        "missing_information": ["item1", "item2"],
+        "recommended_structure": "structure description"
+      }}
+
+# Prompt templates for specific scenarios
+scenario_prompts:
+  multi_complaint_type:
+    description: "When multiple complaint types are detected"
+    additional_instruction: |
+      This complaint involves multiple types: {complaint_types}.
+      Ensure your evaluation considers the interplay between these different aspects
+      and evaluates completeness across all identified complaint dimensions.
+
+  high_value_customer:
+    description: "For high-value or VIP customers"
+    additional_instruction: |
+      Note: This complaint is from a high-value customer segment.
+      Apply stricter quality standards and consider relationship management implications.
+
+  repeat_complaint:
+    description: "For customers with previous similar complaints"
+    additional_instruction: |
+      This customer has {previous_complaint_count} previous complaints of similar nature.
+      Evaluate whether the summary captures this pattern and any indicators of
+      systemic issues or customer frustration.
+
+  time_sensitive:
+    description: "For urgent or time-sensitive complaints"
+    additional_instruction: |
+      This is a time-sensitive complaint requiring urgent attention.
+      Evaluate whether the summary clearly conveys urgency and required response timeframe.
+
+# Response format specifications
+response_formats:
+  standard_json:
+    description: "Standard JSON response format"
+    template: |
+      Respond only with valid JSON. Do not include markdown code blocks or explanations.
+
+  structured_evaluation:
+    description: "Structured evaluation with scores"
+    template: |
+      Provide your response as valid JSON with the following structure:
+      - All numeric scores as numbers (not strings)
+      - Arrays for multiple items
+      - Clear, concise strings for text fields
+      - Boolean values where appropriate

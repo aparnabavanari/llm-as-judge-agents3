@@ -1,0 +1,19 @@
+COMPLAINT EVALUATION REPORT\n===============================================================================================\n\nComplaint ID: SAMPLE_20260415_150709\nCustomer ID: CUST_SAMPLE_20260415_150709\nComplaint Type: fraud\nSubmission Date: 2026-04-15 15:07:09.777285\n\nSUMMARY:\n-----------------------------------------------------------------------------------------------\nCustomer reports unauthorized transactions totaling $5,432 on checking account ending in 7890. Three suspicious wire transfers occurred to unfamiliar recipients. Customer claims no knowledge of these transactions.\n\n
+===============================================================================================
+EVALUATION RESULTS TABLE
+===============================================================================================
+Metric                            Score     Weight     Weighted      Max
+-----------------------------------------------------------------------------------------------
+Factual Accuracy                   5.00      30.0%        1.500      5.0
+Information Completeness           4.00      25.0%        1.000      5.0
+Clarity & Readability              5.00      15.0%        0.750      5.0
+Urgency Detection                  3.00      20.0%        0.600      5.0
+Risk Level Accuracy                4.00      10.0%        0.400      5.0
+-----------------------------------------------------------------------------------------------
+AGGREGATE SCORE (Unweighted)       4.20/5
+WEIGHTED SCORE                     4.25/5
+-----------------------------------------------------------------------------------------------
+Risk Level                         HIGH
+Recommendation                 ESCALATE
+Human Review Required               YES
+===============================================================================================\n\nEvaluation Timestamp: 2026-04-15 15:08:03.768689\n

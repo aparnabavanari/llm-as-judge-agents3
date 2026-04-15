@@ -1,0 +1,24 @@
+COMPLAINT EVALUATION REPORT\n===============================================================================================\n\nComplaint ID: COMP_004\nCustomer ID: CUST_COMP_004\nComplaint Type: regulatory_compliance\nSubmission Date: 2026-04-09 10:28:08.191985\n\nSUMMARY:\n-----------------------------------------------------------------------------------------------\nCustomer alleges violation of fair lending practices. Applied for mortgage 
+            on 03/15/2026 with similar financial profile and credit score as colleague who 
+            was approved. Customer's application denied on 04/01/2026 without clear explanation. 
+            Customer believes denial may be discriminatory based on protected characteristics. 
+            Requesting detailed written explanation of denial reasons and review of lending 
+            practices. Matter may require regulatory review if not resolved satisfactorily.\n\n
+===============================================================================================
+EVALUATION RESULTS TABLE
+===============================================================================================
+Metric                            Score     Weight     Weighted      Max
+-----------------------------------------------------------------------------------------------
+Regulatory Accuracy                5.00      30.0%        1.500      5.0
+Complete Documentation             4.00      25.0%        1.000      5.0
+Issue Clarity                      5.00      15.0%        0.750      5.0
+Severity Evaluation                5.00      20.0%        1.000      5.0
+Legal Risk Identification          4.00      10.0%        0.400      5.0
+-----------------------------------------------------------------------------------------------
+AGGREGATE SCORE (Unweighted)       4.60/5
+WEIGHTED SCORE                     4.65/5
+-----------------------------------------------------------------------------------------------
+Risk Level                     CRITICAL
+Recommendation                 ESCALATE
+Human Review Required               YES
+===============================================================================================\n\nEvaluation Timestamp: 2026-04-09 10:34:38.109376\n

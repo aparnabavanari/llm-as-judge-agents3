@@ -1,0 +1,37 @@
+================================================================================
+HUMAN REVIEW REQUEST
+================================================================================
+Request ID: f986e042-1bec-43ce-9166-e38bf157b1ee
+Complaint ID: COMP_004
+Priority: 1 (1=Highest, 5=Lowest)
+Created: 2026-04-09 10:27:02
+Deadline: 2026-04-09 12:27:02
+Status: pending
+
+EXECUTIVE SUMMARY:
+--------------------------------------------------------------------------------
+High-risk regulatory_compliance complaint requiring expert review
+
+KEY CONCERNS:
+--------------------------------------------------------------------------------
+  • Risk level assessment
+  • Regulatory implications
+  • Customer impact
+
+REVIEW QUESTIONS:
+--------------------------------------------------------------------------------
+  ? Is the risk assessment accurate?
+  ? Are there immediate actions required?
+
+RECOMMENDED ACTIONS:
+--------------------------------------------------------------------------------
+  ✓ Review complaint details
+  ✓ Verify facts
+  ✓ Determine resolution path
+
+EVALUATION SUMMARY:
+--------------------------------------------------------------------------------
+Risk Level: CRITICAL
+Aggregate Score: 4.20/5
+Recommendation: ESCALATE
+================================================================================

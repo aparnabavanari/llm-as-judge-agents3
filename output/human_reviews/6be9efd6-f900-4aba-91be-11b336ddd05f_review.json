@@ -1,0 +1,141 @@
+{
+  "request_id": "6be9efd6-f900-4aba-91be-11b336ddd05f",
+  "complaint_id": "COMP_001",
+  "complaint": {
+    "complaint_id": "COMP_001",
+    "customer_id": "CUST_COMP_001",
+    "original_complaint": "I just checked my account and there are three wire transfers I never authorized! \n            Someone stole over $5000 from my account! This happened two days ago and I had \n            no idea. I need this money back immediately and I want to know how this happened. \n            I'm very worried about my account security. Please help!",
+    "summary": "Customer reports unauthorized transactions totaling $5,432 on checking account \n            ending in 7890. Three suspicious wire transfers occurred on 04/06/2026 to \n            unfamiliar recipients. Customer claims no knowledge of these transactions and \n            noticed the issue when checking balance on 04/08/2026. Account has been \n            temporarily frozen pending investigation. Customer requests immediate refund \n            and investigation into security breach.",
+    "submission_date": "2026-04-09T10:12:16.889895",
+    "complaint_type": "fraud",
+    "secondary_types": [],
+    "has_previous_complaints": false,
+    "previous_complaint_count": 0,
+    "is_high_value_customer": false,
+    "metadata": {}
+  },
+  "evaluation_result": {
+    "complaint_id": "COMP_001",
+    "complaint_type": "fraud",
+    "evaluation_timestamp": "2026-04-09T10:13:36.786284",
+    "metric_scores": [
+      {
+        "metric_id": "accuracy",
+        "metric_name": "Factual Accuracy",
+        "score": 5,
+        "normalized_score": 1.0,
+        "reasoning": "The complaint summary accurately captures all essential details from the original complaint, including the total amount of unauthorized transactions, the specific nature of these transactions (wire transfers), the date they occurred, and the customer's response upon discovering them. The summary also correctly notes the action taken (account freezing) and the customer's requests.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890.",
+          "Three suspicious wire transfers occurred on 04/06/2026 to unfamiliar recipients.",
+          "Customer claims no knowledge of these transactions and noticed the issue when checking balance on 04/08/2026.",
+          "Account has been temporarily frozen pending investigation.",
+          "Customer requests immediate refund and investigation into security breach."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "completeness",
+        "metric_name": "Information Completeness",
+        "score": 5,
+        "normalized_score": 1.0,
+        "reasoning": "The complaint summary effectively captures all critical details related to the fraud incident, which are necessary for understanding and addressing the customer's issue. It specifies the total amount involved, the nature of the transactions (wire transfers), the exact date of the transactions, and the action taken by the bank (account freezing). It also clearly conveys the customer's immediate concerns and requests.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890.",
+          "Three suspicious wire transfers occurred on 04/06/2026 to unfamiliar recipients.",
+          "Account has been temporarily frozen pending investigation.",
+          "Customer requests immediate refund and investigation into security breach."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "clarity",
+        "metric_name": "Clarity & Readability",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary is generally clear and readable, effectively summarizing the key points from the original complaint. It concisely states the amount involved, the nature of the unauthorized transactions, and the customer's response upon discovering the issue. The summary also clearly mentions the action taken (account freezing) and the customer's request.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432 on checking account ending in 7890.",
+          "Three suspicious wire transfers occurred on 04/06/2026 to unfamiliar recipients.",
+          "Customer claims no knowledge of these transactions and noticed the issue when checking balance on 04/08/2026.",
+          "Account has been temporarily frozen pending investigation.",
+          "Customer requests immediate refund and investigation into security breach."
+        ],
+        "suggestions": [
+          "To enhance readability, consider breaking the summary into bullet points to separate key details more distinctly.",
+          "Use more active voice where possible to make the summary more engaging and direct."
+        ]
+      },
+      {
+        "metric_id": "urgency_capture",
+        "metric_name": "Urgency Detection",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The summary effectively captures the urgency of the situation by mentioning the recent dates of the unauthorized transactions and the immediate action taken by the customer to address the issue. It also notes the customer's request for an 'immediate refund' and an investigation, which are critical to understanding the time-sensitive nature of the complaint.",
+        "evidence": [
+          "Three suspicious wire transfers occurred on 04/06/2026",
+          "noticed the issue when checking balance on 04/08/2026",
+          "Customer requests immediate refund"
+        ],
+        "suggestions": [
+          "Include specific mention of the customer's emotional state or urgency in their original communication to highlight the personal impact and urgency, such as noting the customer's expression of worry about account security.",
+          "Provide a clearer timeline or sequence of events to emphasize the quick progression from discovery of the problem to the action taken, enhancing the perception of urgency."
+        ]
+      },
+      {
+        "metric_id": "risk_assessment",
+        "metric_name": "Risk Level Accuracy",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary accurately conveys the severity and impact of the unauthorized transactions by specifying the exact amount and detailing the nature of the transactions (wire transfers to unknown recipients). This information reflects a high risk to the customer's financial security and appropriately captures the urgency of the situation as indicated by the account being temporarily frozen and the customer's request for an immediate refund and investigation.",
+        "evidence": [
+          "Customer reports unauthorized transactions totaling $5,432",
+          "Three suspicious wire transfers occurred",
+          "Account has been temporarily frozen pending investigation",
+          "Customer requests immediate refund and investigation into security breach"
+        ],
+        "suggestions": [
+          "To improve the risk level accuracy, the summary could include potential implications on the customer's financial stability or mention any emotional distress expressed by the customer to enhance the understanding of the full impact of the fraud."
+        ]
+      }
+    ],
+    "aggregate_score": 4.4,
+    "weighted_score": 4.55,
+    "risk_level": "high",
+    "recommendation": "escalate",
+    "reasoning": "The summary is of high quality, effectively capturing all critical details of the fraud complaint with a clear focus on factual accuracy and completeness. It presents the information in a clear and coherent manner, making it easy to understand the severity and urgency of the issue.",
+    "strengths": [
+      "The summary is highly accurate in terms of factual content, capturing all essential details of the complaint.",
+      "It comprehensively includes all necessary information to understand the issue and the customer's immediate needs."
+    ],
+    "weaknesses": [
+      "Clarity and readability, although high, might be improved slightly to enhance the ease of understanding for all readers, possibly by simplifying some sentences or restructuring for smoother flow."
+    ],
+    "requires_human_review": true,
+    "triggered_rules": [
+      "BR001",
+      "BR002"
+    ],
+    "confidence_score": 0.85
+  },
+  "priority_level": 1,
+  "executive_summary": "The customer has reported high-value unauthorized transactions totaling $5,432 through wire transfers to unknown recipients from their checking account. The account has been frozen, and the customer is seeking a refund and an investigation into the security breach.",
+  "key_concerns": [
+    "Risk level assessment",
+    "Regulatory implications",
+    "Customer impact"
+  ],
+  "review_questions": [
+    "Is the risk assessment accurate?",
+    "Are there immediate actions required?"
+  ],
+  "recommended_actions": [
+    "Review complaint details",
+    "Verify facts",
+    "Determine resolution path"
+  ],
+  "created_at": "2026-04-09T10:13:50.713348",
+  "assigned_to": null,
+  "review_deadline": "2026-04-09T12:13:50.713348",
+  "status": "pending"
+}

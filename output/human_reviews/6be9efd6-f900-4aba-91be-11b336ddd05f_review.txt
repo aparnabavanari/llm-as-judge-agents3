@@ -1,0 +1,37 @@
+================================================================================
+HUMAN REVIEW REQUEST
+================================================================================
+Request ID: 6be9efd6-f900-4aba-91be-11b336ddd05f
+Complaint ID: COMP_001
+Priority: 1 (1=Highest, 5=Lowest)
+Created: 2026-04-09 10:13:50
+Deadline: 2026-04-09 12:13:50
+Status: pending
+
+EXECUTIVE SUMMARY:
+--------------------------------------------------------------------------------
+The customer has reported high-value unauthorized transactions totaling $5,432 through wire transfers to unknown recipients from their checking account. The account has been frozen, and the customer is seeking a refund and an investigation into the security breach.
+
+KEY CONCERNS:
+--------------------------------------------------------------------------------
+  • Risk level assessment
+  • Regulatory implications
+  • Customer impact
+
+REVIEW QUESTIONS:
+--------------------------------------------------------------------------------
+  ? Is the risk assessment accurate?
+  ? Are there immediate actions required?
+
+RECOMMENDED ACTIONS:
+--------------------------------------------------------------------------------
+  ✓ Review complaint details
+  ✓ Verify facts
+  ✓ Determine resolution path
+
+EVALUATION SUMMARY:
+--------------------------------------------------------------------------------
+Risk Level: HIGH
+Aggregate Score: 4.55/5
+Recommendation: ESCALATE
+================================================================================

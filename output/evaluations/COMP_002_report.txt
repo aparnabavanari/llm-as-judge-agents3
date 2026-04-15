@@ -1,0 +1,22 @@
+COMPLAINT EVALUATION REPORT\n===============================================================================================\n\nComplaint ID: COMP_002\nCustomer ID: CUST_COMP_002\nComplaint Type: fees_charges\nSubmission Date: 2026-04-09 10:28:08.191985\n\nSUMMARY:\n-----------------------------------------------------------------------------------------------\nCustomer disputes overdraft fees totaling $175 charged on 04/05/2026. Claims 
+            direct deposit was scheduled to arrive on 04/04/2026 but was delayed by the bank 
+            until 04/06/2026, causing account to overdraft. Customer has been with bank for 
+            8 years with no prior overdraft issues. Requesting fee reversal as the delay was 
+            not customer's fault. Account currently shows positive balance after deposit.\n\n
+===============================================================================================
+EVALUATION RESULTS TABLE
+===============================================================================================
+Metric                            Score     Weight     Weighted      Max
+-----------------------------------------------------------------------------------------------
+Financial Accuracy                 5.00      35.0%        1.750      5.0
+Detail Completeness                5.00      25.0%        1.250      5.0
+Clarity of Dispute                 4.00      20.0%        0.800      5.0
+Justification Quality              4.00      20.0%        0.800      5.0
+-----------------------------------------------------------------------------------------------
+AGGREGATE SCORE (Unweighted)       4.50/5
+WEIGHTED SCORE                     4.60/5
+-----------------------------------------------------------------------------------------------
+Risk Level                       MEDIUM
+Recommendation                  APPROVE
+Human Review Required                NO
+===============================================================================================\n\nEvaluation Timestamp: 2026-04-09 10:31:46.632076\n

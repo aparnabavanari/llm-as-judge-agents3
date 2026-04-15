@@ -1,0 +1,128 @@
+{
+  "request_id": "96503a2a-01ce-4172-b7f8-75723e9f7d7c",
+  "complaint_id": "COMP_004",
+  "complaint": {
+    "complaint_id": "COMP_004",
+    "customer_id": "CUST_COMP_004",
+    "original_complaint": "I applied for a mortgage and was denied, but my colleague with similar income and \n            credit score got approved. I think I'm being discriminated against. I want a full \n            explanation of why I was denied and I'm considering filing a complaint with the \n            regulatory agency. This doesn't seem legal or fair.",
+    "summary": "Customer alleges violation of fair lending practices. Applied for mortgage \n            on 03/15/2026 with similar financial profile and credit score as colleague who \n            was approved. Customer's application denied on 04/01/2026 without clear explanation. \n            Customer believes denial may be discriminatory based on protected characteristics. \n            Requesting detailed written explanation of denial reasons and review of lending \n            practices. Matter may require regulatory review if not resolved satisfactorily.",
+    "submission_date": "2026-04-09T09:46:39.485790",
+    "complaint_type": "regulatory_compliance",
+    "secondary_types": [],
+    "has_previous_complaints": false,
+    "previous_complaint_count": 0,
+    "is_high_value_customer": false,
+    "metadata": {}
+  },
+  "evaluation_result": {
+    "complaint_id": "COMP_004",
+    "complaint_type": "regulatory_compliance",
+    "evaluation_timestamp": "2026-04-09T09:52:38.076082",
+    "metric_scores": [
+      {
+        "metric_id": "accuracy",
+        "metric_name": "Regulatory Accuracy",
+        "score": 8,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary accurately identifies and articulates potential compliance issues related to fair lending practices, which are critical in assessing the legality and fairness of the mortgage application process. The summary effectively captures the essence of the original complaint regarding a possible violation of fair lending laws, which is central to regulatory accuracy. It clearly states the customer's belief that the denial may be discriminatory, suggesting a violation of laws designed to prevent discrimination based on protected characteristics.",
+        "evidence": [
+          "Customer alleges violation of fair lending practices.",
+          "Customer believes denial may be discriminatory based on protected characteristics."
+        ],
+        "suggestions": [
+          "Include specific protected characteristics suspected to be the basis of discrimination to enhance clarity and focus of the regulatory issue.",
+          "Provide a brief description of fair lending laws to contextualize the complaint further and bolster the understanding of the regulatory implications."
+        ]
+      },
+      {
+        "metric_id": "completeness",
+        "metric_name": "Complete Documentation",
+        "score": 9,
+        "normalized_score": 0.9,
+        "reasoning": "The complaint summary effectively captures all the regulatory concerns presented in the original complaint. It details the customer's belief of potential discrimination based on protected characteristics, which aligns with fair lending regulatory frameworks. The summary also mentions the customer's request for a detailed written explanation of the denial reasons and a review of the lending practices, indicating a clear documentation of the issues and potential next steps.",
+        "evidence": [
+          "Customer believes denial may be discriminatory based on protected characteristics.",
+          "Requesting detailed written explanation of denial reasons and review of lending practices."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "clarity",
+        "metric_name": "Issue Clarity",
+        "score": 9,
+        "normalized_score": 0.9,
+        "reasoning": "The complaint summary effectively articulates the compliance concern by specifying the nature of the alleged violation, the context of the application and denial dates, and the grounds on which the customer suspects discriminatory practices. It clearly outlines the customer's request for a detailed explanation and potential escalation to regulatory review, which enhances the clarity of the issue.",
+        "evidence": [
+          "Customer alleges violation of fair lending practices.",
+          "Requesting detailed written explanation of denial reasons and review of lending practices."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "severity_assessment",
+        "metric_name": "Severity Evaluation",
+        "score": 8,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary effectively communicates the severity of the issue by highlighting potential discrimination in lending practices, which is a serious allegation. The summary clearly states the comparison of the customer's financial profile and credit score with a colleague who was approved, underscoring the perceived unfairness and prompting a review of the lending practices. The inclusion of the customer's request for a detailed written explanation and the possibility of regulatory review if the issue is not resolved adds to the gravity of the situation.",
+        "evidence": [
+          "Customer believes denial may be discriminatory based on protected characteristics.",
+          "Requesting detailed written explanation of denial reasons and review of lending practices. Matter may require regulatory review if not resolved satisfactorily."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "legal_implications",
+        "metric_name": "Legal Risk Identification",
+        "score": 8,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary effectively identifies potential legal risks associated with the denial of the mortgage application. It highlights a possible violation of fair lending practices and discrimination based on protected characteristics, which are serious legal issues under various anti-discrimination and fair lending laws. The summary also appropriately mentions the possibility of regulatory review, indicating an awareness of the legal mechanisms available to the complainant.",
+        "evidence": [
+          "Customer believes denial may be discriminatory based on protected characteristics.",
+          "Matter may require regulatory review if not resolved satisfactorily."
+        ],
+        "suggestions": [
+          "Include specific references to relevant laws or regulations, such as the Equal Credit Opportunity Act (ECOA), to strengthen the identification of legal risks.",
+          "Provide a brief description of the potential consequences or penalties that could arise from these legal violations to enhance understanding of the severity of the risk."
+        ]
+      }
+    ],
+    "aggregate_score": 8.4,
+    "weighted_score": 8.4,
+    "risk_level": "critical",
+    "recommendation": "escalate",
+    "reasoning": "The summary is of high quality, demonstrating a thorough understanding of the regulatory issues involved and effectively communicating the details and severity of the complaint. It addresses all necessary components to form a basis for potential legal and regulatory action, if required.",
+    "strengths": [
+      "Accurate reflection of regulatory issues and potential violations which are central to the complaint's context.",
+      "Clear and complete documentation of the complaint details and the complainant's requests, facilitating potential follow-up and review."
+    ],
+    "weaknesses": [
+      "Minor details regarding the specifics of the protected characteristics involved could be more explicitly stated to further enhance understanding and preparation for potential legal scrutiny."
+    ],
+    "requires_human_review": true,
+    "triggered_rules": [
+      "BR001",
+      "BR003"
+    ],
+    "confidence_score": 0.85
+  },
+  "priority_level": 1,
+  "executive_summary": "High-risk regulatory_compliance complaint requiring expert review",
+  "key_concerns": [
+    "Risk level assessment",
+    "Regulatory implications",
+    "Customer impact"
+  ],
+  "review_questions": [
+    "Is the risk assessment accurate?",
+    "Are there immediate actions required?"
+  ],
+  "recommended_actions": [
+    "Review complaint details",
+    "Verify facts",
+    "Determine resolution path"
+  ],
+  "created_at": "2026-04-09T09:52:58.147046",
+  "assigned_to": null,
+  "review_deadline": "2026-04-09T11:52:58.147046",
+  "status": "pending"
+}

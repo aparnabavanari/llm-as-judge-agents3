@@ -1,0 +1,23 @@
+COMPLAINT EVALUATION REPORT\n===============================================================================================\n\nComplaint ID: COMP_003\nCustomer ID: CUST_COMP_003\nComplaint Type: customer_service\nSubmission Date: 2026-04-09 10:28:08.191985\n\nSUMMARY:\n-----------------------------------------------------------------------------------------------\nCustomer reports unsatisfactory experience with phone support on 04/07/2026. 
+            Called regarding simple balance inquiry but was transferred three times and 
+            waited 45 minutes total. Final representative was able to answer question but 
+            customer felt the experience was inefficient. Customer suggests better training 
+            for front-line staff to handle basic inquiries without multiple transfers.\n\n
+===============================================================================================
+EVALUATION RESULTS TABLE
+===============================================================================================
+Metric                            Score     Weight     Weighted      Max
+-----------------------------------------------------------------------------------------------
+Event Accuracy                     5.00      20.0%        1.000      5.0
+Incident Details                   4.00      25.0%        1.000      5.0
+Narrative Clarity                  4.00      25.0%        1.000      5.0
+Customer Sentiment                 4.00      20.0%        0.800      5.0
+Objective Reporting                4.00      10.0%        0.400      5.0
+-----------------------------------------------------------------------------------------------
+AGGREGATE SCORE (Unweighted)       4.20/5
+WEIGHTED SCORE                     4.20/5
+-----------------------------------------------------------------------------------------------
+Risk Level                          LOW
+Recommendation                  APPROVE
+Human Review Required                NO
+===============================================================================================\n\nEvaluation Timestamp: 2026-04-09 10:33:22.712992\n

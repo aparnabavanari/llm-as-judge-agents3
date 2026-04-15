@@ -1,0 +1,127 @@
+# Business Rules Configuration
+# Define complaint types, risk levels, and business logic rules
+
+complaint_types:
+  fraud:
+    name: "Fraud & Unauthorized Transactions"
+    description: "Complaints related to fraudulent activities, unauthorized charges, or identity theft"
+    risk_level: high
+    priority: 1
+    escalation_threshold: 0.7
+    requires_human_review: true
+
+  account_access:
+    name: "Account Access Issues"
+    description: "Problems with login, account lockouts, password resets"
+    risk_level: medium
+    priority: 2
+    escalation_threshold: 0.8
+    requires_human_review: false
+
+  fees_charges:
+    name: "Fees & Charges Dispute"
+    description: "Disputes regarding bank fees, overdraft charges, or billing errors"
+    risk_level: medium
+    priority: 3
+    escalation_threshold: 0.75
+    requires_human_review: false
+
+  loan_mortgage:
+    name: "Loan & Mortgage Issues"
+    description: "Issues with loan applications, mortgage rates, payment processing"
+    risk_level: high
+    priority: 2
+    escalation_threshold: 0.7
+    requires_human_review: true
+
+  customer_service:
+    name: "Customer Service Experience"
+    description: "Complaints about staff behavior, service quality, response time"
+    risk_level: low
+    priority: 4
+    escalation_threshold: 0.85
+    requires_human_review: false
+
+  transaction_errors:
+    name: "Transaction Processing Errors"
+    description: "Failed transactions, incorrect amounts, delayed transfers"
+    risk_level: medium
+    priority: 3
+    escalation_threshold: 0.75
+    requires_human_review: false
+
+  credit_card:
+    name: "Credit Card Issues"
+    description: "Credit card disputes, billing errors, interest rate concerns"
+    risk_level: medium
+    priority: 3
+    escalation_threshold: 0.75
+    requires_human_review: false
+
+  regulatory_compliance:
+    name: "Regulatory & Compliance"
+    description: "Concerns about regulatory violations, compliance issues, or legal matters"
+    risk_level: critical
+    priority: 1
+    escalation_threshold: 0.6
+    requires_human_review: true
+
+# Risk level definitions
+risk_levels:
+  critical:
+    score_threshold: 0.9
+    auto_escalate: true
+    requires_immediate_action: true
+    human_review_mandatory: true
+
+  high:
+    score_threshold: 0.7
+    auto_escalate: true
+    requires_immediate_action: false
+    human_review_mandatory: true
+
+  medium:
+    score_threshold: 0.5
+    auto_escalate: false
+    requires_immediate_action: false
+    human_review_mandatory: false
+
+  low:
+    score_threshold: 0.3
+    auto_escalate: false
+    requires_immediate_action: false
+    human_review_mandatory: false
+
+# Business logic rules
+business_rules:
+  - rule_id: "BR001"
+    name: "High Risk Auto-Escalation"
+    condition: "risk_level in ['critical', 'high'] and aggregate_score >= escalation_threshold"
+    action: "escalate_to_human"
+
+  - rule_id: "BR002"
+    name: "Fraud Pattern Detection"
+    condition: "complaint_type == 'fraud' and confidence_score >= 0.8"
+    action: "flag_for_immediate_review"
+
+  - rule_id: "BR003"
+    name: "Regulatory Compliance Alert"
+    condition: "complaint_type == 'regulatory_compliance'"
+    action: "notify_compliance_team"
+
+  - rule_id: "BR004"
+    name: "Quality Threshold Check"
+    condition: "aggregate_score < 0.4"
+    action: "request_summary_revision"
+
+  - rule_id: "BR005"
+    name: "Multiple Complaint Types"
+    condition: "detected_types_count > 1"
+    action: "cross_reference_evaluation"
+
+# Thresholds
+thresholds:
+  minimum_summary_quality: 0.4
+  maximum_auto_approve_score: 0.95
+  human_review_confidence_threshold: 0.6
+  metric_weight_tolerance: 0.05

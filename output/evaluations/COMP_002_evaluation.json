@@ -1,0 +1,94 @@
+{
+  "complaint": {
+    "complaint_id": "COMP_002",
+    "customer_id": "CUST_COMP_002",
+    "original_complaint": "I'm very frustrated with these overdraft fees. My paycheck was supposed to be \n            deposited on the 4th but didn't show up until the 6th, and in the meantime I got \n            hit with $175 in fees. This isn't fair - I've been a customer for 8 years and \n            never had this problem. Can you please reverse these fees?",
+    "summary": "Customer disputes overdraft fees totaling $175 charged on 04/05/2026. Claims \n            direct deposit was scheduled to arrive on 04/04/2026 but was delayed by the bank \n            until 04/06/2026, causing account to overdraft. Customer has been with bank for \n            8 years with no prior overdraft issues. Requesting fee reversal as the delay was \n            not customer's fault. Account currently shows positive balance after deposit.",
+    "submission_date": "2026-04-09T10:28:08.191985",
+    "complaint_type": "fees_charges",
+    "secondary_types": [],
+    "has_previous_complaints": false,
+    "previous_complaint_count": 0,
+    "is_high_value_customer": false,
+    "metadata": {}
+  },
+  "evaluation": {
+    "complaint_id": "COMP_002",
+    "complaint_type": "fees_charges",
+    "evaluation_timestamp": "2026-04-09T10:31:46.632076",
+    "metric_scores": [
+      {
+        "metric_id": "accuracy",
+        "metric_name": "Financial Accuracy",
+        "score": 5,
+        "normalized_score": 1.0,
+        "reasoning": "The complaint summary accurately reflects the financial details as described in the original complaint. It correctly notes the total amount of overdraft fees ($175), the scheduled date of the deposit (04/04/2026), and the actual deposit date (04/06/2026). These details are crucial for assessing the validity and context of the complaint regarding financial transactions.",
+        "evidence": [
+          "Customer disputes overdraft fees totaling $175 charged on 04/05/2026.",
+          "Claims direct deposit was scheduled to arrive on 04/04/2026 but was delayed by the bank until 04/06/2026."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "completeness",
+        "metric_name": "Detail Completeness",
+        "score": 5,
+        "normalized_score": 1.0,
+        "reasoning": "The complaint summary effectively captures all necessary details from the original complaint regarding the disputed charges and the reasons for the dispute. It clearly states the total amount of the overdraft fees, the expected and actual dates of the direct deposit, and the customer's history with the bank. It also mentions the current account status, which adds to the completeness by showing the resolution of the initial cause of the overdraft.",
+        "evidence": [
+          "Customer disputes overdraft fees totaling $175 charged on 04/05/2026.",
+          "Claims direct deposit was scheduled to arrive on 04/04/2026 but was delayed by the bank until 04/06/2026, causing account to overdraft.",
+          "Customer has been with bank for 8 years with no prior overdraft issues.",
+          "Account currently shows positive balance after deposit."
+        ],
+        "suggestions": []
+      },
+      {
+        "metric_id": "clarity",
+        "metric_name": "Clarity of Dispute",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary provides a clear and concise explanation of the dispute, detailing the timing of the direct deposit and its impact on the overdraft fees. It successfully outlines the customer's perspective, the sequence of events leading to the dispute, and the customer's request.",
+        "evidence": [
+          "Claims direct deposit was scheduled to arrive on 04/04/2026 but was delayed by the bank until 04/06/2026, causing account to overdraft.",
+          "Requesting fee reversal as the delay was not customer's fault."
+        ],
+        "suggestions": [
+          "Include additional details about the bank's usual processing times for direct deposits to provide context on why the delay from 04/04 to 04/06 is considered unusual.",
+          "Clarify whether the customer contacted the bank prior to the overdraft occurrence to inquire about the delayed deposit."
+        ]
+      },
+      {
+        "metric_id": "justification",
+        "metric_name": "Justification Quality",
+        "score": 4,
+        "normalized_score": 0.8,
+        "reasoning": "The complaint summary effectively documents the customer's reasoning for disputing the overdraft fees. It clearly states the expected date of the direct deposit and its delay, which is crucial in establishing the basis for the fee dispute. The summary also highlights the customer's long-standing relationship with the bank and their clean overdraft history, which supports the customer's case for a fee reversal.",
+        "evidence": [
+          "Claims direct deposit was scheduled to arrive on 04/04/2026 but was delayed by the bank until 04/06/2026, causing account to overdraft.",
+          "Customer has been with bank for 8 years with no prior overdraft issues."
+        ],
+        "suggestions": [
+          "Include more specific details about the bank's typical processing times or any notifications received regarding the delay, to strengthen the customer's argument.",
+          "Provide information on the customer's attempts to resolve the issue directly with the bank prior to lodging the complaint, if any, to add depth to the justification."
+        ]
+      }
+    ],
+    "aggregate_score": 4.5,
+    "weighted_score": 4.6,
+    "risk_level": "medium",
+    "recommendation": "approve",
+    "reasoning": "The complaint summary is of high quality, capturing all relevant details and presenting them in a clear and logically structured manner. It provides an accurate, complete, and clear account of the customer's dispute with sufficient justification.",
+    "strengths": [
+      "The summary accurately captures and reflects the financial transactions and dates, which are critical for understanding the context and specifics of the complaint.",
+      "It includes all relevant details, maintaining a comprehensive view of the customer's historical relationship with the bank and the specifics of the incident.",
+      "The clarity in describing the sequence of events and the impact of these events on the customer's financial situation helps in understanding the dispute fully."
+    ],
+    "weaknesses": [
+      "While the summary is generally clear, there could be a slight enhancement in articulating the causal link between the bank's actions and the incurred fees to further solidify the customer's position."
+    ],
+    "requires_human_review": false,
+    "triggered_rules": [],
+    "confidence_score": 0.85
+  }
+}

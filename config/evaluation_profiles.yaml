@@ -1,0 +1,276 @@
+# Evaluation Profiles Configuration
+# Define metrics and their weights for each complaint type
+
+evaluation_profiles:
+  fraud:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Factual Accuracy"
+        description: "Accuracy of facts, dates, amounts, and account details"
+        weight: 0.30
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Information Completeness"
+        description: "All critical fraud-related details captured"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Clarity & Readability"
+        description: "Clear, concise, and understandable summary"
+        weight: 0.15
+        scale: 1-5
+
+      - metric_id: "urgency_capture"
+        name: "Urgency Detection"
+        description: "Proper identification of time-sensitive elements"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "risk_assessment"
+        name: "Risk Level Accuracy"
+        description: "Correct assessment of fraud severity and impact"
+        weight: 0.10
+        scale: 1-5
+
+  account_access:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Technical Accuracy"
+        description: "Correct technical details about access issues"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Information Completeness"
+        description: "All relevant access issues documented"
+        weight: 0.30
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Clarity & Structure"
+        description: "Well-organized and easy to understand"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "resolution_steps"
+        name: "Resolution Path Clarity"
+        description: "Clear indication of steps taken or needed"
+        weight: 0.25
+        scale: 1-5
+
+  fees_charges:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Financial Accuracy"
+        description: "Correct amounts, dates, and transaction details"
+        weight: 0.35
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Detail Completeness"
+        description: "All disputed charges and reasons captured"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Clarity of Dispute"
+        description: "Clear explanation of the dispute reason"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "justification"
+        name: "Justification Quality"
+        description: "Customer's reasoning properly documented"
+        weight: 0.20
+        scale: 1-5
+
+  loan_mortgage:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Financial Details Accuracy"
+        description: "Accurate loan amounts, rates, terms, and dates"
+        weight: 0.30
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Comprehensive Coverage"
+        description: "All loan/mortgage issues fully documented"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Issue Clarity"
+        description: "Clear description of the problem"
+        weight: 0.15
+        scale: 1-5
+
+      - metric_id: "regulatory_compliance"
+        name: "Regulatory Awareness"
+        description: "Identification of potential regulatory concerns"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "financial_impact"
+        name: "Financial Impact Assessment"
+        description: "Clear indication of monetary impact on customer"
+        weight: 0.10
+        scale: 1-5
+
+  customer_service:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Event Accuracy"
+        description: "Accurate representation of what occurred"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Incident Details"
+        description: "All relevant interaction details captured"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Narrative Clarity"
+        description: "Clear timeline and description of events"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "sentiment_capture"
+        name: "Customer Sentiment"
+        description: "Proper capture of customer emotions and concerns"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "objectivity"
+        name: "Objective Reporting"
+        description: "Balanced, unbiased summary of the interaction"
+        weight: 0.10
+        scale: 1-5
+
+  transaction_errors:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Transaction Accuracy"
+        description: "Precise transaction details, amounts, timestamps"
+        weight: 0.35
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Error Documentation"
+        description: "Complete description of what went wrong"
+        weight: 0.30
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Problem Clarity"
+        description: "Clear explanation of the transaction issue"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "impact_assessment"
+        name: "Impact Evaluation"
+        description: "Assessment of financial/operational impact"
+        weight: 0.15
+        scale: 1-5
+
+  credit_card:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Transaction Accuracy"
+        description: "Accurate card transaction details"
+        weight: 0.30
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Issue Completeness"
+        description: "All credit card issues fully documented"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Dispute Clarity"
+        description: "Clear explanation of the credit card issue"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "timeline"
+        name: "Timeline Accuracy"
+        description: "Correct sequence of events and dates"
+        weight: 0.15
+        scale: 1-5
+
+      - metric_id: "resolution_tracking"
+        name: "Resolution Status"
+        description: "Clear indication of resolution status"
+        weight: 0.10
+        scale: 1-5
+
+  regulatory_compliance:
+    metrics:
+      - metric_id: "accuracy"
+        name: "Regulatory Accuracy"
+        description: "Accurate identification of compliance issues"
+        weight: 0.30
+        scale: 1-5
+
+      - metric_id: "completeness"
+        name: "Complete Documentation"
+        description: "All regulatory concerns documented"
+        weight: 0.25
+        scale: 1-5
+
+      - metric_id: "clarity"
+        name: "Issue Clarity"
+        description: "Clear articulation of compliance concern"
+        weight: 0.15
+        scale: 1-5
+
+      - metric_id: "severity_assessment"
+        name: "Severity Evaluation"
+        description: "Appropriate severity level assigned"
+        weight: 0.20
+        scale: 1-5
+
+      - metric_id: "legal_implications"
+        name: "Legal Risk Identification"
+        description: "Proper identification of legal risks"
+        weight: 0.10
+        scale: 1-5
+
+# Default evaluation profile (fallback)
+default_profile:
+  metrics:
+    - metric_id: "accuracy"
+      name: "General Accuracy"
+      description: "Overall factual accuracy"
+      weight: 0.30
+      scale: 1-5
+
+    - metric_id: "completeness"
+      name: "General Completeness"
+      description: "Information completeness"
+      weight: 0.30
+      scale: 1-5
+
+    - metric_id: "clarity"
+      name: "General Clarity"
+      description: "Clarity and readability"
+      weight: 0.25
+      scale: 1-5
+
+    - metric_id: "relevance"
+      name: "Relevance"
+      description: "Relevance to complaint"
+      weight: 0.15
+      scale: 1-5
+
+# Scoring guidelines
+scoring_guidelines:
+  excellent: 5
+  good: 4
+  satisfactory: 3
+  poor: 2
+  inadequate: 1

@@ -11,15 +11,16 @@ from src.utils.config_loader import ConfigLoader
 class ComplaintClassifierAgent(BaseLLMAgent):
     """Agent responsible for classifying complaint summaries"""
     
-    def __init__(self, config_loader: ConfigLoader, model_name: str = "gpt-4"):
+    def __init__(self, config_loader: ConfigLoader, model_name: str = "gpt-4", provider: str = "auto"):
         """
         Initialize complaint classifier agent
         
         Args:
             config_loader: Configuration loader instance
             model_name: LLM model name
+            provider: LLM provider ("openai", "ollama", or "auto")
         """
-        super().__init__(model_name)
+        super().__init__(model_name, provider=provider)
         self.config = config_loader
     
     def execute(self, complaint: Complaint) -> ComplaintClassification:

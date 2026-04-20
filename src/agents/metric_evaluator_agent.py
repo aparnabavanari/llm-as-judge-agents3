@@ -11,15 +11,16 @@ from src.utils.config_loader import ConfigLoader
 class MetricEvaluatorAgent(BaseLLMAgent):
     """Agent responsible for evaluating summaries against specific metrics"""
     
-    def __init__(self, config_loader: ConfigLoader, model_name: str = "gpt-4"):
+    def __init__(self, config_loader: ConfigLoader, model_name: str = "gpt-4", provider: str = "auto"):
         """
         Initialize metric evaluator agent
         
         Args:
             config_loader: Configuration loader instance
             model_name: LLM model name
+            provider: LLM provider ("openai", "ollama", or "auto")
         """
-        super().__init__(model_name)
+        super().__init__(model_name, provider=provider)
         self.config = config_loader
     
     def execute(

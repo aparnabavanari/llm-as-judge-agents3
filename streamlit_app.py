@@ -84,14 +84,15 @@ def init_session_state():
         st.session_state.current_evaluation = None
 
 
-def initialize_orchestrator(model_name: str = "gpt-4-turbo", provider: str = "auto"):
+def initialize_orchestrator(model_name: str = "gpt-4-turbo", provider: str = "auto", use_database: bool = True):
     """Initialize or get the orchestrator"""
     if st.session_state.orchestrator is None:
         with st.spinner("Initializing LLM Judge Orchestrator..."):
             st.session_state.orchestrator = LLMJudgeOrchestrator(
                 model_name=model_name,
                 output_dir="./output",
-                provider=provider
+                provider=provider,
+                use_database=use_database
             )
         st.success("✅ Orchestrator initialized successfully!")
     return st.session_state.orchestrator

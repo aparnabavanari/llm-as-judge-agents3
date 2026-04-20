@@ -1,6 +1,6 @@
 """
 Configuration loader utility
-Loads and manages YAML configuration files
+Loads and manages configuration from SQLite database with YAML fallback
 """
 import yaml
 import os
@@ -9,14 +9,16 @@ from pathlib import Path
 
 
 class ConfigLoader:
-    """Loads and manages configuration from YAML files"""
+    """Loads and manages configuration from database (or YAML fallback)"""
     
-    def __init__(self, config_dir: str = None):
+    def __init__(self, config_dir: str = None, use_database: bool = True, db_path: str = None):
         """
         Initialize configuration loader
         
         Args:
             config_dir: Path to configuration directory
+            use_database: If True, use database; otherwise use YAML files
+            db_path: Path to SQLite database
         """
         if config_dir is None:
             # Default to config directory relative to project root
@@ -24,6 +26,19 @@ class ConfigLoader:
             config_dir = current_dir / "config"
         
         self.config_dir = Path(config_dir)
+        self.use_database = use_database
+        
+        # Initialize database manager if using database
+        self.db = None
+        if use_database:
+            try:
+                from src.database.db_manager import DatabaseManager
+                self.db = DatabaseManager(db_path)
+            except Exception as e:
+                print(f"Warning: Failed to initialize database, falling back to YAML: {e}")
+                self.use_database = False
+        
+        # Cache for YAML-based configs
         self._business_rules = None
         self._evaluation_profiles = None
         self._prompts = None
@@ -48,21 +63,109 @@ class ConfigLoader:
     
     def get_business_rules(self) -> Dict[str, Any]:
         """Get business rules configuration"""
-        if self._business_rules is None:
-            self._business_rules = self.load_yaml('business_rules.yaml')
-        return self._business_rules
+        if self.use_database and self.db:
+            return self._get_business_rules_from_db()
+        else:
+            if self._business_rules is None:
+                self._business_rules = self.load_yaml('business_rules.yaml')
+            return self._business_rules
     
     def get_evaluation_profiles(self) -> Dict[str, Any]:
         """Get evaluation profiles configuration"""
-        if self._evaluation_profiles is None:
-            self._evaluation_profiles = self.load_yaml('evaluation_profiles.yaml')
-        return self._evaluation_profiles
+        if self.use_database and self.db:
+            return self._get_evaluation_profiles_from_db()
+        else:
+            if self._evaluation_profiles is None:
+                self._evaluation_profiles = self.load_yaml('evaluation_profiles.yaml')
+            return self._evaluation_profiles
     
     def get_prompts(self) -> Dict[str, Any]:
         """Get prompts configuration"""
-        if self._prompts is None:
-            self._prompts = self.load_yaml('prompts.yaml')
-        return self._prompts
+        if self.use_database and self.db:
+            return self._get_prompts_from_db()
+        else:
+            if self._prompts is None:
+                self._prompts = self.load_yaml('prompts.yaml')
+            return self._prompts
+    
+    def _get_business_rules_from_db(self) -> Dict[str, Any]:
+        """Load business rules from database"""
+        result = {
+            'complaint_types': {},
+            'business_rules': []
+        }
+        
+        # Load complaint types
+        complaint_types = self.db.get_complaint_types(active_only=True)
+        for ct in complaint_types:
+            result['complaint_types'][ct.type_id] = {
+                'name': ct.name,
+                'description': ct.description,
+                'risk_level': ct.risk_level,
+                'priority': ct.priority,
+                'escalation_threshold': ct.escalation_threshold,
+                'requires_human_review': ct.requires_human_review
+            }
+        
+        # Load business rules
+        rules = self.db.get_business_rules(active_only=True)
+        for rule in rules:
+            rule_dict = {
+                'rule_id': rule.rule_id,
+                'name': rule.name,
+                'description': rule.description,
+                'condition': rule.condition,
+                'action': rule.action,
+                'priority': rule.priority
+            }
+            if rule.complaint_type:
+                rule_dict['complaint_type'] = rule.complaint_type.type_id
+            result['business_rules'].append(rule_dict)
+        
+        return result
+    
+    def _get_evaluation_profiles_from_db(self) -> Dict[str, Any]:
+        """Load evaluation profiles from database"""
+        result = {
+            'evaluation_profiles': {}
+        }
+        
+        # Load all evaluation profiles
+        profiles = self.db.get_evaluation_profiles(active_only=True)
+        for profile in profiles:
+            type_id = profile.complaint_type.type_id
+            result['evaluation_profiles'][type_id] = {
+                'description': profile.description,
+                'metrics': [
+                    {
+                        'metric_id': m.metric_id,
+                        'name': m.name,
+                        'description': m.description,
+                        'weight': m.weight,
+                        'scale': m.scale,
+                        'display_order': m.display_order
+                    }
+                    for m in sorted(profile.metrics, key=lambda x: x.display_order)
+                    if m.is_active
+                ]
+            }
+        
+        return result
+    
+    def _get_prompts_from_db(self) -> Dict[str, Any]:
+        """Load prompts from database"""
+        result = {
+            'prompts': {}
+        }
+        
+        # Load all prompt templates
+        templates = self.db.get_prompt_templates(active_only=True)
+        for template in templates:
+            if template.agent_name not in result['prompts']:
+                result['prompts'][template.agent_name] = {}
+            result['prompts'][template.agent_name][template.prompt_type] = template.content
+        
+        return result
     
     def get_complaint_type_config(self, complaint_type: str) -> Optional[Dict[str, Any]]:
         """
@@ -229,12 +332,14 @@ class ConfigLoader:
 _config_loader_instance = None
 
 
-def get_config_loader(config_dir: str = None) -> ConfigLoader:
+def get_config_loader(config_dir: str = None, use_database: bool = True, db_path: str = None) -> ConfigLoader:
     """
     Get singleton ConfigLoader instance
     
     Args:
         config_dir: Path to configuration directory
+        use_database: If True, use database; otherwise use YAML
+        db_path: Path to SQLite database
         
     Returns:
         ConfigLoader instance
@@ -242,6 +347,6 @@ def get_config_loader(config_dir: str = None) -> ConfigLoader:
     global _config_loader_instance
     
     if _config_loader_instance is None:
-        _config_loader_instance = ConfigLoader(config_dir)
+        _config_loader_instance = ConfigLoader(config_dir, use_database, db_path)
     
     return _config_loader_instance

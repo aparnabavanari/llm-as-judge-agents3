@@ -40,7 +40,9 @@ class LLMJudgeOrchestrator:
         config_dir: Optional[str] = None,
         model_name: str = "gpt-4-turbo",
         output_dir: Optional[str] = None,
-        provider: str = "auto"
+        provider: str = "auto",
+        use_database: bool = True,
+        db_path: str = None
     ):
         """
         Initialize the orchestrator
@@ -50,9 +52,11 @@ class LLMJudgeOrchestrator:
             model_name: LLM model to use for all agents (default: gpt-4-turbo)
             output_dir: Directory for output files (evaluations, reviews)
             provider: LLM provider ("openai", "ollama", or "auto" for auto-detection)
+            use_database: If True, use database; otherwise use YAML
+            db_path: Path to SQLite database
         """
         # Initialize configuration
-        self.config = get_config_loader(config_dir)
+        self.config = get_config_loader(config_dir, use_database, db_path)
         self.scoring_engine = ScoringEngine(self.config)
         self.model_name = model_name
         self.provider = provider

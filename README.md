@@ -110,6 +110,22 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+### Initialize DB
+
+python src\database\db_init.py --config-dir ./config
+
+### Launch Admin Panel
+
+.\launch_admin.ps1
+
+# Opens at http://localhost:8502
+
+# Main Application
+
+streamlit run streamlit_app.py
+
+# Database configuration enabled by default!
+
 ### 4. Configure API Keys
 
 Create a `.env` file in the project root:

@@ -9,6 +9,7 @@ import streamlit as st
 from datetime import datetime
 from pathlib import Path
 import json
+import os
 from typing import Optional, Dict, Any, List
 
 from src.main import LLMJudgeOrchestrator, create_sample_complaint
@@ -83,13 +84,14 @@ def init_session_state():
         st.session_state.current_evaluation = None
 
 
-def initialize_orchestrator(model_name: str = "gpt-4-turbo"):
+def initialize_orchestrator(model_name: str = "gpt-4-turbo", provider: str = "auto"):
     """Initialize or get the orchestrator"""
     if st.session_state.orchestrator is None:
         with st.spinner("Initializing LLM Judge Orchestrator..."):
             st.session_state.orchestrator = LLMJudgeOrchestrator(
                 model_name=model_name,
-                output_dir="./output"
+                output_dir="./output",
+                provider=provider
             )
         st.success("✅ Orchestrator initialized successfully!")
     return st.session_state.orchestrator
@@ -166,11 +168,35 @@ def render_home_page():
     st.markdown("### 🚀 Quick Start")
     
     with st.expander("1️⃣ Initialize the System", expanded=True):
-        model_options = ["gpt-4-turbo", "gpt-4", "gpt-3.5-turbo", "gpt-4o"]
-        selected_model = st.selectbox("Select LLM Model", model_options)
+        # Provider selection
+        provider_choice = st.radio(
+            "Select Provider",
+            ["OpenAI (Cloud)", "Ollama (Local)"],
+            horizontal=True
+        )
+        
+        if "OpenAI" in provider_choice:
+            model_options = ["gpt-4-turbo", "gpt-4", "gpt-3.5-turbo", "gpt-4o"]
+            selected_model = st.selectbox("Select OpenAI Model", model_options)
+            provider = "openai"
+            
+            # Check for API key
+            if not os.getenv('OPENAI_API_KEY'):
+                st.warning("⚠️ OPENAI_API_KEY environment variable not set. Please set it before initializing.")
+        else:
+            model_options = ["gemma3:1b", "mistral", "llama3", "llama2"]
+            selected_model = st.selectbox("Select Ollama Model", model_options)
+            provider = "ollama"
+            
+            st.info("💡 Make sure Ollama is running and the model is downloaded. Run: `ollama pull " + selected_model + "`")
         
         if st.button("Initialize Orchestrator", type="primary"):
-            initialize_orchestrator(selected_model)
+            try:
+                initialize_orchestrator(selected_model, provider)
+            except Exception as e:
+                st.error(f"❌ Initialization failed: {str(e)}")
+                if "ollama" in str(e).lower():
+                    st.info("Make sure Ollama is running: `ollama serve`")
     
     with st.expander("2️⃣ Evaluate Complaints"):
         st.write("Navigate to **📝 Evaluate Complaint** to submit and evaluate complaints")
@@ -416,9 +442,9 @@ def display_evaluation_results(result: Dict[str, Any]):
                 st.success(strength)
     
     with col2:
-        if evaluation.areas_for_improvement:
+        if evaluation.weaknesses:
             st.markdown("### 🔍 Areas for Improvement")
-            for area in evaluation.areas_for_improvement:
+            for area in evaluation.weaknesses:
                 st.warning(area)
     
     # Human Review Request
@@ -513,16 +539,39 @@ def render_settings_page():
     with tab1:
         st.markdown("### LLM Model Configuration")
         
-        current_model = "gpt-4-turbo" if st.session_state.orchestrator else "Not initialized"
-        st.info(f"Current Model: **{current_model}**")
+        if st.session_state.orchestrator:
+            current_model = st.session_state.orchestrator.model_name
+            current_provider = st.session_state.orchestrator.provider
+            st.info(f"Current Model: **{current_model}** (Provider: {current_provider})")
+        else:
+            st.info("Current Model: **Not initialized**")
         
         st.markdown("#### Reinitialize with Different Model")
-        model_options = ["gpt-4-turbo", "gpt-4", "gpt-3.5-turbo", "gpt-4o"]
-        new_model = st.selectbox("Select Model", model_options)
+        
+        # Provider selection
+        provider_choice = st.radio(
+            "Select Provider",
+            ["OpenAI (Cloud)", "Ollama (Local)"],
+            horizontal=True,
+            key="settings_provider"
+        )
+        
+        if "OpenAI" in provider_choice:
+            model_options = ["gpt-4-turbo", "gpt-4", "gpt-3.5-turbo", "gpt-4o"]
+            new_model = st.selectbox("Select OpenAI Model", model_options, key="settings_openai_model")
+            provider = "openai"
+        else:
+            model_options = ["gemma3:1b", "mistral", "llama3", "llama2"]
+            new_model = st.selectbox("Select Ollama Model", model_options, key="settings_ollama_model")
+            provider = "ollama"
+            st.info("💡 Make sure Ollama is running and model is pulled: `ollama pull " + new_model + "`")
         
         if st.button("Reinitialize Orchestrator"):
             st.session_state.orchestrator = None
-            initialize_orchestrator(new_model)
+            try:
+                initialize_orchestrator(new_model, provider)
+            except Exception as e:
+                st.error(f"❌ Initialization failed: {str(e)}")
     
     with tab2:
         st.markdown("### Configuration Files")

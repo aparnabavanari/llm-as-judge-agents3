@@ -39,7 +39,8 @@ class LLMJudgeOrchestrator:
         self,
         config_dir: Optional[str] = None,
         model_name: str = "gpt-4-turbo",
-        output_dir: Optional[str] = None
+        output_dir: Optional[str] = None,
+        provider: str = "auto"
     ):
         """
         Initialize the orchestrator
@@ -48,16 +49,19 @@ class LLMJudgeOrchestrator:
             config_dir: Path to configuration directory
             model_name: LLM model to use for all agents (default: gpt-4-turbo)
             output_dir: Directory for output files (evaluations, reviews)
+            provider: LLM provider ("openai", "ollama", or "auto" for auto-detection)
         """
         # Initialize configuration
         self.config = get_config_loader(config_dir)
         self.scoring_engine = ScoringEngine(self.config)
+        self.model_name = model_name
+        self.provider = provider
         
         # Initialize agents
-        self.classifier_agent = ComplaintClassifierAgent(self.config, model_name)
-        self.evaluator_agent = MetricEvaluatorAgent(self.config, model_name)
-        self.judge_agent = JudgeAgent(self.config, self.scoring_engine, model_name)
-        self.review_agent = HumanReviewAgent(self.config, self.scoring_engine, model_name)
+        self.classifier_agent = ComplaintClassifierAgent(self.config, model_name, provider)
+        self.evaluator_agent = MetricEvaluatorAgent(self.config, model_name, provider)
+        self.judge_agent = JudgeAgent(self.config, self.scoring_engine, model_name, provider)
+        self.review_agent = HumanReviewAgent(self.config, self.scoring_engine, model_name, provider)
         
         # Output directory
         self.output_dir = Path(output_dir) if output_dir else Path("./output")

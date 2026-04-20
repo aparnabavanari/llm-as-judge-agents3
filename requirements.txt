@@ -7,6 +7,7 @@ python-dotenv>=1.0.0
 
 # LLM API Integration (choose based on your provider)
 openai>=1.12.0  # For OpenAI GPT models
+ollama>=0.1.0  # For local Ollama models
 # anthropic>=0.18.0  # Uncomment for Claude models
 # azure-openai>=1.0.0  # Uncomment for Azure OpenAI
 

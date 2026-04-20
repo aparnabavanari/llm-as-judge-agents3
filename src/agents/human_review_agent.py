@@ -18,7 +18,8 @@ class HumanReviewAgent(BaseLLMAgent):
         self,
         config_loader: ConfigLoader,
         scoring_engine: ScoringEngine,
-        model_name: str = "gpt-4"
+        model_name: str = "gpt-4",
+        provider: str = "auto"
     ):
         """
         Initialize human review agent
@@ -27,7 +28,11 @@ class HumanReviewAgent(BaseLLMAgent):
             config_loader: Configuration loader instance
             scoring_engine: Scoring engine instance
             model_name: LLM model name
+            provider: LLM provider ("openai", "ollama", or "auto")
         """
+        super().__init__(model_name, provider=provider)
+        self.config = config_loader
+        self.scoring_engine = scoring_engine
         super().__init__(model_name)
         self.config = config_loader
         self.scoring_engine = scoring_engine

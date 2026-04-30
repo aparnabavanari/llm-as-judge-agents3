@@ -1,0 +1,68 @@
+(.venv) C:\Users\aparn\TOPAZ\BOFA\llm-as-judge-agents3>python test_metric_validation.py
+
+================================================================================
+PHASE 1 SAFETY NET - METRIC VALIDATION TESTS
+================================================================================
+
+================================================================================
+TEST 1: Valid Metric Configuration (weights sum to 1.0)
+================================================================================
+✅ SUCCESS: Profile created with ID 15
+   Total weight: 1.000
+   Validation: ✅ PASSED
+
+================================================================================
+TEST 2: Invalid Metric Configuration (weights sum to 1.2)
+================================================================================
+✅ SUCCESS: Validation prevented invalid configuration
+   Error message: Invalid metric configuration: Metric weights sum to 1.2000, must equal 1.0 (tolerance: ±0.001). Total weight: 1.200 (must equal 1.0)
+   Total weight attempted: 1.200
+
+================================================================================
+TEST 3: Weight Normalization Suggestions
+================================================================================
+Current total weight: 1.200
+Is valid: False
+
+❌ Errors:
+   - Metric weights sum to 1.2000, must equal 1.0 (tolerance: ±0.001)
+
+💡 Suggested normalized weights:
+   - accuracy       : 0.350 → 0.292
+   - completeness   : 0.400 → 0.333
+   - clarity        : 0.250 → 0.208
+   - urgency        : 0.200 → 0.167
+
+================================================================================
+TEST 4: Duplicate Metric IDs Detection
+================================================================================
+Is valid: False
+
+❌ Errors detected:
+   - Duplicate metric IDs found: accuracy
+✅ SUCCESS: Duplicate metric IDs properly detected
+
+================================================================================
+TEST 5: Validation on Metric Update
+================================================================================
+Testing with profile: Fraud & Unauthorized Transactions Evaluation Profile (ID: 1)
+
+Current state:
+   Total weight: 1.000
+   Metric count: 5
+   Is valid: True
+
+   Metrics:
+      - accuracy       : 0.300
+      - completeness   : 0.250
+      - clarity        : 0.150
+      - urgency_capture: 0.200
+      - risk_assessment: 0.100
+
+⚠️  Attempting to update 'accuracy' weight from 0.300 to 0.80 (would break validation)...
+✅ SUCCESS: Update blocked by validation
+   Error: Updating this metric would create invalid weight distribution: Metric weights sum to 1.5000, must equal 1.0 (tolerance: ±0.001). Total weight: 1.500
+
+================================================================================
+TESTS COMPLETED
+================================================================================

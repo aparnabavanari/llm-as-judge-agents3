@@ -92,6 +92,10 @@ class DatabaseManager:
             self._log_change(session, 'complaint_types', complaint_type.id, 'create', None, complaint_type.to_dict())
             session.commit()
             
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(complaint_type)
+            session.expunge(complaint_type)
+            
             return complaint_type
         except Exception as e:
             session.rollback()
@@ -123,6 +127,10 @@ class DatabaseManager:
             # Log change
             self._log_change(session, 'complaint_types', complaint_type.id, 'update', old_value, complaint_type.to_dict())
             session.commit()
+            
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(complaint_type)
+            session.expunge(complaint_type)
             
             return complaint_type
         except Exception as e:
@@ -182,6 +190,10 @@ class DatabaseManager:
             self._log_change(session, 'business_rules', rule.id, 'create', None, rule.to_dict())
             session.commit()
             
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(rule)
+            session.expunge(rule)
+            
             return rule
         except Exception as e:
             session.rollback()
@@ -211,6 +223,10 @@ class DatabaseManager:
             # Log change
             self._log_change(session, 'business_rules', rule.id, 'update', old_value, rule.to_dict())
             session.commit()
+            
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(rule)
+            session.expunge(rule)
             
             return rule
         except Exception as e:
@@ -282,6 +298,14 @@ class DatabaseManager:
         """Create new evaluation profile with metrics"""
         session = self.get_session()
         try:
+            # Validate metric weights before creating
+            validation = self._validate_metric_weights(metrics)
+            if not validation['is_valid']:
+                raise ValueError(
+                    f"Invalid metric configuration: {', '.join(validation['errors'])}. "
+                    f"Total weight: {validation['total_weight']:.3f} (must equal 1.0)"
+                )
+            
             profile = EvaluationProfile(**data)
             session.add(profile)
             session.flush()  # Get the profile ID
@@ -298,6 +322,12 @@ class DatabaseManager:
             self._log_change(session, 'evaluation_profiles', profile.id, 'create', None, profile.to_dict())
             session.commit()
             
+            # Refresh again after logging commit to reload attributes
+            session.refresh(profile)
+            # Force load the metrics relationship before expunging
+            _ = len(profile.metrics)
+            session.expunge(profile)
+            
             return profile
         except Exception as e:
             session.rollback()
@@ -313,12 +343,26 @@ class DatabaseManager:
         try:
             metric = EvaluationMetric(**data)
             session.add(metric)
+            session.flush()  # Get metric ID before validation
+            
+            # Validate the entire profile's weights after adding
+            validation = self.validate_metric_profile(metric.profile_id)
+            if not validation['is_valid']:
+                raise ValueError(
+                    f"Adding this metric would create invalid weight distribution: "
+                    f"{', '.join(validation['errors'])}. Total weight: {validation['total_weight']:.3f}"
+                )
+            
             session.commit()
             session.refresh(metric)
             
             # Log change
             self._log_change(session, 'evaluation_metrics', metric.id, 'create', None, metric.to_dict())
             session.commit()
+            
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(metric)
+            session.expunge(metric)
             
             return metric
         except Exception as e:
@@ -337,18 +381,33 @@ class DatabaseManager:
                 raise ValueError(f"Metric ID '{metric_id}' not found")
             
             old_value = metric.to_dict()
+            profile_id = metric.profile_id
             
             for key, value in data.items():
                 if hasattr(metric, key):
                     setattr(metric, key, value)
             
             metric.updated_at = datetime.now()
+            session.flush()  # Apply changes before validation
+            
+            # Validate the entire profile's weights after update
+            validation = self.validate_metric_profile(profile_id)
+            if not validation['is_valid']:
+                raise ValueError(
+                    f"Updating this metric would create invalid weight distribution: "
+                    f"{', '.join(validation['errors'])}. Total weight: {validation['total_weight']:.3f}"
+                )
+            
             session.commit()
             session.refresh(metric)
             
             # Log change
             self._log_change(session, 'evaluation_metrics', metric.id, 'update', old_value, metric.to_dict())
             session.commit()
+            
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(metric)
+            session.expunge(metric)
             
             return metric
         except Exception as e:
@@ -367,8 +426,25 @@ class DatabaseManager:
                 raise ValueError(f"Metric ID '{metric_id}' not found")
             
             old_value = metric.to_dict()
+            profile_id = metric.profile_id
             metric.is_active = False
             metric.updated_at = datetime.now()
+            session.flush()  # Apply changes before validation
+            
+            # Validate remaining metrics after deletion
+            validation = self.validate_metric_profile(profile_id)
+            if not validation['is_valid']:
+                # Check if at least one metric remains
+                remaining_count = len([m for m in validation.get('metrics', []) if m.get('is_active')])
+                if remaining_count == 0:
+                    # Allow deletion if no metrics remain (profile cleanup scenario)
+                    pass
+                else:
+                    raise ValueError(
+                        f"Deleting this metric would create invalid weight distribution: "
+                        f"{', '.join(validation['errors'])}. Total weight: {validation['total_weight']:.3f}"
+                    )
+            
             session.commit()
             
             # Log change
@@ -420,6 +496,10 @@ class DatabaseManager:
             self._log_change(session, 'prompt_templates', prompt.id, 'create', None, prompt.to_dict())
             session.commit()
             
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(prompt)
+            session.expunge(prompt)
+            
             return prompt
         except Exception as e:
             session.rollback()
@@ -449,6 +529,10 @@ class DatabaseManager:
             # Log change
             self._log_change(session, 'prompt_templates', prompt.id, 'update', old_value, prompt.to_dict())
             session.commit()
+            
+            # Refresh after logging commit and expunge to make object usable after session closes
+            session.refresh(prompt)
+            session.expunge(prompt)
             
             return prompt
         except Exception as e:
@@ -481,3 +565,158 @@ class DatabaseManager:
             return query.order_by(ConfigurationHistory.changed_at.desc()).limit(limit).all()
         finally:
             self.close_session(session)
+    
+    # ==================== Validation Methods (Phase 1: Safety Net) ====================
+    
+    def validate_metric_profile(self, profile_id: int) -> Dict[str, Any]:
+        """
+        Validate metric configuration for an evaluation profile
+        
+        Checks:
+        - Weight sum equals 1.0 (with tolerance)
+        - No duplicate metric IDs
+        - All weights are positive
+        - At least one metric exists
+        
+        Args:
+            profile_id: ID of the evaluation profile to validate
+            
+        Returns:
+            Dictionary with validation results:
+            {
+                'is_valid': bool,
+                'total_weight': float,
+                'metric_count': int,
+                'errors': List[str],
+                'warnings': List[str],
+                'metrics': List[Dict]
+            }
+        """
+        session = self.get_session()
+        try:
+            profile = session.query(EvaluationProfile).filter_by(id=profile_id).first()
+            
+            if not profile:
+                return {
+                    'is_valid': False,
+                    'errors': [f"Profile ID {profile_id} not found"],
+                    'warnings': [],
+                    'total_weight': 0.0,
+                    'metric_count': 0,
+                    'metrics': []
+                }
+            
+            # Get active metrics
+            active_metrics = [m for m in profile.metrics if m.is_active]
+            
+            # Convert to dict format for validation
+            metrics_data = [
+                {
+                    'id': m.id,
+                    'metric_id': m.metric_id,
+                    'name': m.name,
+                    'weight': m.weight,
+                    'is_active': m.is_active
+                }
+                for m in active_metrics
+            ]
+            
+            # Perform validation
+            validation = self._validate_metric_weights(metrics_data)
+            validation['metrics'] = metrics_data
+            
+            return validation
+            
+        finally:
+            self.close_session(session)
+    
+    def _validate_metric_weights(self, metrics: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Validate metric weight configuration
+        
+        Args:
+            metrics: List of metric dictionaries with 'weight' and 'metric_id' keys
+            
+        Returns:
+            Dictionary with validation results including errors, warnings, and suggestions
+        """
+        errors = []
+        warnings = []
+        
+        # Filter active metrics if is_active key exists
+        active_metrics = [
+            m for m in metrics 
+            if m.get('is_active', True)  # Default to True if key doesn't exist
+        ]
+        
+        metric_count = len(active_metrics)
+        
+        # Check if at least one metric exists
+        if metric_count == 0:
+            warnings.append("No active metrics found")
+            return {
+                'is_valid': True,  # Allow empty profiles for cleanup scenarios
+                'total_weight': 0.0,
+                'metric_count': 0,
+                'errors': [],
+                'warnings': warnings,
+                'suggested_weights': []
+            }
+        
+        # Calculate total weight
+        total_weight = sum(m.get('weight', 0) for m in active_metrics)
+        
+        # Check weight sum (tolerance: 0.001)
+        weight_tolerance = 0.001
+        is_weight_valid = abs(total_weight - 1.0) < weight_tolerance
+        
+        if not is_weight_valid:
+            errors.append(
+                f"Metric weights sum to {total_weight:.4f}, must equal 1.0 "
+                f"(tolerance: ±{weight_tolerance})"
+            )
+        
+        # Check for duplicate metric IDs
+        metric_ids = [m.get('metric_id') for m in active_metrics]
+        unique_ids = set(metric_ids)
+        if len(metric_ids) != len(unique_ids):
+            duplicates = [mid for mid in metric_ids if metric_ids.count(mid) > 1]
+            errors.append(f"Duplicate metric IDs found: {', '.join(set(duplicates))}")
+        
+        # Check for negative weights
+        negative_weights = [m for m in active_metrics if m.get('weight', 0) < 0]
+        if negative_weights:
+            errors.append(
+                f"Negative weights found for metrics: "
+                f"{', '.join(m.get('metric_id', 'unknown') for m in negative_weights)}"
+            )
+        
+        # Check for zero weights
+        zero_weights = [m for m in active_metrics if m.get('weight', 0) == 0]
+        if zero_weights:
+            warnings.append(
+                f"Zero weights found for metrics: "
+                f"{', '.join(m.get('metric_id', 'unknown') for m in zero_weights)}"
+            )
+        
+        # Generate normalized weight suggestions if invalid
+        suggested_weights = []
+        if not is_weight_valid and total_weight > 0:
+            suggested_weights = [
+                {
+                    'metric_id': m.get('metric_id'),
+                    'name': m.get('name', 'Unknown'),
+                    'current_weight': m.get('weight', 0),
+                    'suggested_weight': round(m.get('weight', 0) / total_weight, 4)
+                }
+                for m in active_metrics
+            ]
+        
+        return {
+            'is_valid': len(errors) == 0,
+            'total_weight': total_weight,
+            'metric_count': metric_count,
+            'errors': errors,
+            'warnings': warnings,
+            'suggested_weights': suggested_weights
+        }

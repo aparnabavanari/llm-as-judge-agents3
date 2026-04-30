@@ -1,3 +1,14 @@
+Phase -1 
+========
+All 5 validation tests now pass:
+
+1. Valid metric configuration (weights = 1.0)
+2. Invalid weight sum detection (blocks weights ≠ 1.0)
+3. Normalization suggestions provided
+4. Duplicate metric ID detection
+5. Update operation validation
+
+
 (.venv) C:\Users\aparn\TOPAZ\BOFA\llm-as-judge-agents3>python test_metric_validation.py
 
 ================================================================================
